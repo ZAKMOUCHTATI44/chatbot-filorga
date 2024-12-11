@@ -10,7 +10,7 @@ import { getLang } from "./LangService";
 export async function chatbot(req:Request , res : Response) {
   let message: MessageRequest = req.body;
 
-  console.log(message)
+  console.log(JSON.stringify(message))
 
 
   let step: string = "";
@@ -77,9 +77,7 @@ export async function chatbot(req:Request , res : Response) {
         });
       } else if (id.includes("option")) {
         step = id.replace("option", "");
-
         console.log(`handle each step with his id ${step}`)
-
       
       } else if (id.includes("menu-default")) {
         const lang = await getLang(message.from);

@@ -2,7 +2,6 @@ import { Lang } from "@prisma/client";
 import { getLang } from "./LangService";
 
 export async function getMenu(lang: Lang) {
-  let rows = [];
   let body = {
     fr: "Bienvenue chez Filorga Maroc 🌟  Je suis votre assistant beauté, prêt à vous guider pour sublimer votre peau.   Que souhaitez-vous faire aujourd’hui ? ",
     ar: "أهلاً وسهلاً في فيلورغا المغرب 🌟 أنا مساعدك الجمالي، مستعد لإرشادك لتحسين بشرتك. ماذا ترغب في القيام به اليوم؟",
@@ -23,36 +22,36 @@ export async function getMenu(lang: Lang) {
         text: " ",
       },
       action: {
-        button: lang === Lang.AR ? "خيارات" : "options",
+        button: lang === Lang.AR ? "خيارات" : "Options",
         sections: [
           {
             title:
               lang === Lang.AR ? "حدد اختيارك" : "Sélectionner votre choix",
             rows: [
               {
-                id: "1",
-                title: "Découvrir nos produits. ",
-                description: " ",
+                id: "option1",
+                description :lang === Lang.AR ? "اكتشف منتجاتنا." : "Découvrir nos produits. ",
+                title: " ",
               },
               {
-                id: "2",
-                title: "Trouver une routine personnalisée. ",
-                description: " ",
+                id: "option2",
+                description : lang === Lang.AR ? "ابحث عن روتين مخصص." : "Trouver une routine personnalisée. ",
+                title: " ",
               },
               {
-                id: "3",
-                title: "En savoir plus sur nos actifs et notre expertise.",
-                description: " ",
+                id: "option3",
+                description :lang === Lang.AR ? "تعرف على أصولنا وخبراتنا." :  "En savoir plus sur nos actifs et notre expertise.",
+                title: " ",
               },
               {
-                id: "4",
-                title: "Localiser un point de vente. ",
-                description: " ",
+                id: "option4",
+                description: lang === Lang.AR ? "تحديد موقع نقطة بيع." : "Localiser un point de vente. ",
+                title: " ",
               },
               {
-                id: "4",
-                title: "Parler à un conseiller.",
-                description: " ",
+                id: "option5",
+                description: lang === Lang.AR ? "التحدث مع مستشار." :  "Parler à un conseiller.",
+                title: " ",
               },
             ],
           },
