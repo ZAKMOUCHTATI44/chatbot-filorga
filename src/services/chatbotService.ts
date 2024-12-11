@@ -6,6 +6,7 @@ import { sendMessage } from "./nexmoService";
 import { Lang } from "@prisma/client";
 import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
+import { getStep1 } from "./Steps";
 
 export async function chatbot(req:Request , res : Response) {
   let message: MessageRequest = req.body;
@@ -77,6 +78,22 @@ export async function chatbot(req:Request , res : Response) {
         });
       } else if (id.includes("option")) {
         step = id.replace("option", "");
+
+        switch (step) {
+          case "1":
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "custom",
+              custom: await getStep1(message.from),
+            });
+          
+            break;
+        
+          default:
+            break;
+        }
         console.log(`handle each step with his id ${step}`)
       
       } else if (id.includes("menu-default")) {

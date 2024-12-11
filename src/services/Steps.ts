@@ -1,7 +1,10 @@
 import { Lang } from "@prisma/client";
+import { getLang } from "./LangService";
 
-export async function Step1(lang: Lang) {
+export async function getStep1(phone: string) {
   // Return the senario for the "Découvrir Nos Produits"
+
+  const lang = await getLang(phone)
 
   let body = {
     fr: "Quels produits souhaitez-vous découvrir ?",
