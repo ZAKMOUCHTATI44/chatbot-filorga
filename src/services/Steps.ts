@@ -88,10 +88,7 @@ export async function getStep2(phone: string) {
       type: "list",
       header: {
         type: "text",
-        text:
-          lang === Lang.AR
-            ? "اعثري على روتين."
-            : "Trouver une routine.",
+        text: lang === Lang.AR ? "اعثري على روتين." : "Trouver une routine.",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -104,9 +101,7 @@ export async function getStep2(phone: string) {
         sections: [
           {
             title:
-              lang === Lang.AR
-                ? "ما نوع بشرتك؟"
-                : "Quel est votre type de peau ?",
+              lang === Lang.AR ? "حدد اختيارك" : "Sélectionner votre choix",
             rows: [
               {
                 id: "2-1",
@@ -207,7 +202,7 @@ export async function getStep5(phone: string) {
 
   let body = {
     fr: "Un conseiller est disponible pour répondre à vos questions.",
-    ar: "يوجد مستشار متاح للإجابة عن أسئلتك."
+    ar: "يوجد مستشار متاح للإجابة عن أسئلتك.",
   };
 
   let custom = {
@@ -229,7 +224,9 @@ export async function getStep5(phone: string) {
         sections: [
           {
             title:
-              lang === Lang.AR ? "يرجى تحديد خيار": "Veuillez choisir une option",
+              lang === Lang.AR
+                ? "يرجى تحديد خيار"
+                : "Veuillez choisir une option",
             rows: [
               {
                 id: "5-1",
