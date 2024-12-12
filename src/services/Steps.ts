@@ -1,5 +1,6 @@
 import { Lang } from "@prisma/client";
 import { getLang } from "./LangService";
+import { title } from "process";
 
 export async function getStep1(phone: string) {
   // Return the senario for the "Découvrir Nos Produits"
@@ -109,24 +110,23 @@ export async function getStep2(phone: string) {
             rows: [
               {
                 id: "typedepeau1",
-                description: " ",
-
-                title: lang === Lang.AR ? "جافة" : "Sèche .",
+                title: " ",
+                description: lang === Lang.AR ? "جافة" : "Sèche .",
               },
               {
                 id: "typedepeau2",
-                description: " ",
-                title: lang === Lang.AR ? "دهنية" : "Grasse .",
+                title: " ",
+                description: lang === Lang.AR ? "دهنية" : "Grasse .",
               },
               {
                 id: "typedepeau3",
-                description: " ",
-                title: lang === Lang.AR ? "مختلطة" : "Mixte.",
+                title: " ",
+                description: lang === Lang.AR ? "مختلطة" : "Mixte.",
               },
               {
                 id: "typedepeau4",
-                description: " ",
-                title: lang === Lang.AR ? "عادية" : "Normale",
+                title: " ",
+                 description: lang === Lang.AR ? "عادية" : "Normale",
               },
             ],
           },
