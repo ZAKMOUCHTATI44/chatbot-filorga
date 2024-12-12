@@ -8,6 +8,7 @@ import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
 import { getStep1, getStep2, getStep2detail, getStep3, getStep5 } from "./Steps";
 import { getProductDetail } from "./ProductDetail";
+import { storeOption } from "./storeOption";
 
 export async function chatbot(req: Request, res: Response) {
   let message: MessageRequest = req.body;
@@ -19,22 +20,18 @@ export async function chatbot(req: Request, res: Response) {
 
   switch (message.message_type) {
     case "location":
-      let search = "location";
-
-      console.log("Send List of stores")
-      // TODO
-      // sendMessage({
-      //   channel: "whatsapp",
-      //   from: message.to,
-      //   to: message.from,
-      //   message_type: "custom",
-      //   custom: await storeOption(
-      //     message.location.lat,
-      //     message.location.long,
-      //     message.from,
-      //     search
-      //   ),
-      // });
+      sendMessage({
+        channel: "whatsapp",
+        from: message.to,
+        to: message.from,
+        message_type: "custom",
+        custom: await storeOption(
+          message.location.lat,
+          message.location.long,
+          message.from,
+          
+        ),
+      });
 
       break;
     case "reply":
