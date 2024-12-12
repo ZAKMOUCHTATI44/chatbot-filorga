@@ -2,6 +2,7 @@ import { Lang } from "@prisma/client";
 import { getLang } from "./LangService";
 
 export async function getProductDetail(phone: string) {
+    console.log("DETAIL PROFUCTS")
   const lang = await getLang(phone);
   let body = {
     fr: "TIME Filler est conçu pour corriger 5 types de rides en 7 jours grâce à l’acide hyaluronique et aux peptides. Souhaitez-vous",
