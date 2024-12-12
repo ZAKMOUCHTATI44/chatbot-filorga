@@ -127,6 +127,10 @@ export async function chatbot(req: Request, res: Response) {
             sendButtonBackToMenu(message)
             break;
           case "5":
+            const rows =  await getStep5(message.from)
+            console.log("******************")
+            console.log(JSON.stringify(rows))
+            console.log("******************")
             sendMessage({
               channel: "whatsapp",
               from: message.to,
@@ -134,7 +138,7 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "custom",
               custom: await getStep5(message.from)
             });
-            sendButtonBackToMenu(message)
+            // sendButtonBackToMenu(message)
             break;
 
           default:

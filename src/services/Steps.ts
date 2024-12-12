@@ -238,7 +238,7 @@ export async function getStep5(phone: string) {
                 title: " ",
               },
               {
-                id: "5-3",
+                id: "5-2",
                 description:
                   lang === Lang.AR
                     ? "اطرح سؤالاً عبر واتساب."
@@ -247,8 +247,7 @@ export async function getStep5(phone: string) {
               },
               {
                 id: "5-3",
-                description:
-                  lang === Lang.AR
+                description: lang === Lang.AR
                     ? "اكتب رسالة هنا (الرد خلال 24 ساعة)."
                     : "Écrire un message ici (réponse sous 24h).",
                 title: " ",
