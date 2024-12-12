@@ -7,6 +7,7 @@ import { Lang } from "@prisma/client";
 import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
 import { getStep1, getStep2, getStep3, getStep5 } from "./Steps";
+import { getProductDetail } from "./ProductDetail";
 
 export async function chatbot(req: Request, res: Response) {
   let message: MessageRequest = req.body;
@@ -75,7 +76,23 @@ export async function chatbot(req: Request, res: Response) {
           phone: message.from,
           profileName: message.profile.name,
         });
-      } else if (id.includes("option")) {
+      } 
+      else if (id.includes("products")) {
+
+        sendMessage({
+          channel: "whatsapp",
+          from: message.to,
+          to: message.from,
+          message_type: "custom",
+          custom: await getProductDetail(message.from),
+        });
+        sendButtonBackToMenu(message)
+
+
+
+      }
+      
+      else if (id.includes("option")) {
         step = id.replace("option", "");
 
         switch (step) {
