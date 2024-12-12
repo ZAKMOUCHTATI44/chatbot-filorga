@@ -109,24 +109,24 @@ export async function getStep2(phone: string) {
                 : "Quel est votre type de peau ?",
             rows: [
               {
-                id: "typedepeau1",
+                id: "2-1",
                 title: " ",
                 description: lang === Lang.AR ? "جافة" : "Sèche .",
               },
               {
-                id: "typedepeau2",
+                id: "2-2",
                 title: " ",
                 description: lang === Lang.AR ? "دهنية" : "Grasse .",
               },
               {
-                id: "typedepeau3",
+                id: "2-3",
                 title: " ",
                 description: lang === Lang.AR ? "مختلطة" : "Mixte.",
               },
               {
-                id: "typedepeau4",
+                id: "2-4",
                 title: " ",
-                 description: lang === Lang.AR ? "عادية" : "Normale",
+                description: lang === Lang.AR ? "عادية" : "Normale",
               },
             ],
           },
@@ -232,7 +232,7 @@ export async function getStep5(phone: string) {
               lang === Lang.AR ? "يرجى تحديد خيار": "Veuillez choisir une option",
             rows: [
               {
-                id: "support1",
+                id: "5-1",
                 description:
                   lang === Lang.AR
                     ? "تلقي مكالمة هاتفية."
@@ -241,7 +241,7 @@ export async function getStep5(phone: string) {
                 title: " ",
               },
               {
-                id: "support2",
+                id: "5-3",
                 description:
                   lang === Lang.AR
                     ? "اطرح سؤالاً عبر واتساب."
@@ -249,7 +249,7 @@ export async function getStep5(phone: string) {
                 title: " ",
               },
               {
-                id: "support3",
+                id: "5-3",
                 description:
                   lang === Lang.AR
                     ? "اكتب رسالة هنا (الرد خلال 24 ساعة)."
