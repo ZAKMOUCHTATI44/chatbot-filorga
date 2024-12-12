@@ -78,8 +78,8 @@ export async function getStep2(phone: string) {
   const lang = await getLang(phone);
 
   let body = {
-    fr: "Pour trouver votre routine idéale, j’ai besoin de quelques informations rapides.",
-    ar: "للعثور على روتينك المثالي، أحتاج إلى بعض المعلومات السريعة.",
+    fr: "Pour trouver votre routine idéale, j’ai besoin de quelques informations rapides. \n 1️⃣ Quel est votre type de peau ?",
+    ar: "للعثور على روتينك المثالي، أحتاج إلى بعض المعلومات السريعة. \n 1️⃣ ما هو نوع بشرتك؟"
   };
 
   let custom = {
@@ -104,22 +104,22 @@ export async function getStep2(phone: string) {
               lang === Lang.AR ? "حدد اختيارك" : "Sélectionner votre choix",
             rows: [
               {
-                id: "2-1",
+                id: "peau-1",
                 title: " ",
                 description: lang === Lang.AR ? "جافة" : "Sèche .",
               },
               {
-                id: "2-2",
+                id: "peau-2",
                 title: " ",
                 description: lang === Lang.AR ? "دهنية" : "Grasse .",
               },
               {
-                id: "2-3",
+                id: "peau-3",
                 title: " ",
                 description: lang === Lang.AR ? "مختلطة" : "Mixte.",
               },
               {
-                id: "2-4",
+                id: "peau-4",
                 title: " ",
                 description: lang === Lang.AR ? "عادية" : "Normale",
               },
@@ -132,6 +132,67 @@ export async function getStep2(phone: string) {
 
   return custom;
 }
+
+export async function getStep2detail(phone: string) {
+  const lang = await getLang(phone);
+
+  let body = {
+    fr: " Quelle est votre principale préoccupation ?  ",
+    ar: " ما هو مصدر قلقك الرئيسي؟  "
+  };
+
+  let custom = {
+    type: "interactive",
+    interactive: {
+      type: "list",
+      header: {
+        type: "text",
+        text: lang === Lang.AR ? " " : " ",
+      },
+      body: {
+        text: lang === Lang.AR ? body.ar : body.fr,
+      },
+      footer: {
+        text: " ",
+      },
+      action: {
+        button: lang === Lang.AR ? "اختر" : "Choisir",
+        sections: [
+          {
+            title:
+              lang === Lang.AR ? "حدد اختيارك" : "Sélectionner votre choix",
+            rows: [
+              {
+                id: "routine-1",
+                title: " ",
+                description: lang === Lang.AR ? "التجاعيد وفقدان التماسك." : "Rides et perte de fermeté.",
+              },
+              {
+                id: "routine-2",
+                title: " ",
+                description: lang === Lang.AR ? "الجفاف" : "Déshydratation.",
+              },
+              {
+                id: "routine-3",
+                title: " ",
+                description: lang === Lang.AR ? "بشرة باهتة" : "Teint terne.",
+              },
+              {
+                id: "routine-4",
+                title: " ",
+                description: lang === Lang.AR ? "الحماية من الأشعة فوق البنفسجية" : "Protection UV",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+
+  return custom;
+}
+
+
 
 export async function getStep3(phone: string) {
   const lang = await getLang(phone);

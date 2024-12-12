@@ -6,7 +6,7 @@ import { sendMessage } from "./nexmoService";
 import { Lang } from "@prisma/client";
 import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
-import { getStep1, getStep2, getStep3, getStep5 } from "./Steps";
+import { getStep1, getStep2, getStep2detail, getStep3, getStep5 } from "./Steps";
 import { getProductDetail } from "./ProductDetail";
 
 export async function chatbot(req: Request, res: Response) {
@@ -87,9 +87,17 @@ export async function chatbot(req: Request, res: Response) {
           custom: await getProductDetail(message.from),
         });
         sendButtonBackToMenu(message)
+      }
+      else if (id.includes("peau")) {
 
-
-
+        sendMessage({
+          channel: "whatsapp",
+          from: message.to,
+          to: message.from,
+          message_type: "custom",
+          custom: await getStep2detail(message.from),
+        });
+        sendButtonBackToMenu(message)
       }
       
       else if (id.includes("option")) {
