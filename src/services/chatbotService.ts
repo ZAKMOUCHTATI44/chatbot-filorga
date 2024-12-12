@@ -6,9 +6,15 @@ import { sendMessage } from "./nexmoService";
 import { Lang } from "@prisma/client";
 import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
-import { getStep1, getStep2, getStep2detail, getStep3, getStep5 } from "./Steps";
+import {
+  getStep1,
+  getStep2,
+  getStep2detail,
+  getStep3,
+  getStep5,
+} from "./Steps";
 import { getProductDetail } from "./ProductDetail";
-import { storeOption } from "./storeOption";
+import { getStoreLocation, storeOption } from "./storeOption";
 
 export async function chatbot(req: Request, res: Response) {
   let message: MessageRequest = req.body;
@@ -28,8 +34,7 @@ export async function chatbot(req: Request, res: Response) {
         custom: await storeOption(
           message.location.lat,
           message.location.long,
-          message.from,
-          
+          message.from
         ),
       });
 
@@ -38,14 +43,13 @@ export async function chatbot(req: Request, res: Response) {
       let { id, title, description } = message?.reply;
       if (id.includes("location")) {
         // get the store id and return the location to user
-        // sendMessage({
-        //   channel: "whatsapp",
-        //   from: message.to,
-        //   to: message.from,
-        //   message_type: "custom",
-        //   custom: await getStoreLocation(id.replace("location", "")),
-        // });
-
+        sendMessage({
+          channel: "whatsapp",
+          from: message.to,
+          to: message.from,
+          message_type: "custom",
+          custom: await getStoreLocation(id.replace("location", "")),
+        });
         sendButtonBackToMenu(message);
       } else if (id.includes("btn-lang-fr")) {
         sendMessage({
@@ -75,9 +79,7 @@ export async function chatbot(req: Request, res: Response) {
           phone: message.from,
           profileName: message.profile.name,
         });
-      } 
-      else if (id.includes("products")) {
-
+      } else if (id.includes("products")) {
         sendMessage({
           channel: "whatsapp",
           from: message.to,
@@ -85,10 +87,8 @@ export async function chatbot(req: Request, res: Response) {
           message_type: "custom",
           custom: await getProductDetail(message.from),
         });
-        sendButtonBackToMenu(message)
-      }
-      else if (id.includes("peau")) {
-
+        sendButtonBackToMenu(message);
+      } else if (id.includes("peau")) {
         sendMessage({
           channel: "whatsapp",
           from: message.to,
@@ -96,10 +96,8 @@ export async function chatbot(req: Request, res: Response) {
           message_type: "custom",
           custom: await getStep2detail(message.from),
         });
-        sendButtonBackToMenu(message)
-      }
-      
-      else if (id.includes("option")) {
+        sendButtonBackToMenu(message);
+      } else if (id.includes("option")) {
         step = id.replace("option", "");
 
         switch (step) {
@@ -111,7 +109,7 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "custom",
               custom: await getStep1(message.from),
             });
-            sendButtonBackToMenu(message)
+            sendButtonBackToMenu(message);
             break;
 
           case "2":
@@ -122,7 +120,7 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "custom",
               custom: await getStep2(message.from),
             });
-            sendButtonBackToMenu(message)
+            sendButtonBackToMenu(message);
 
             break;
           case "3":
@@ -133,7 +131,7 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "custom",
               custom: await getStep3(message.from),
             });
-            sendButtonBackToMenu(message)
+            sendButtonBackToMenu(message);
 
             break;
           case "4":
@@ -148,19 +146,19 @@ export async function chatbot(req: Request, res: Response) {
                   ? `يرجى مشاركة موقعك معنا📍`
                   : "Merci de nous partager votre localisation📍",
             });
-            sendButtonBackToMenu(message)
+            sendButtonBackToMenu(message);
             break;
           case "5":
-            const rows =  await getStep5(message.from)
-            console.log("******************")
-            console.log(JSON.stringify(rows))
-            console.log("******************")
+            const rows = await getStep5(message.from);
+            console.log("******************");
+            console.log(JSON.stringify(rows));
+            console.log("******************");
             sendMessage({
               channel: "whatsapp",
               from: message.to,
               to: message.from,
               message_type: "custom",
-              custom: await getStep5(message.from)
+              custom: await getStep5(message.from),
             });
             // sendButtonBackToMenu(message)
             break;

@@ -50,12 +50,12 @@ export async function storeOption(lat: number, long: number, from: string) {
       type: "list",
       header: {
         type: "text",
-        text: lang === "AR" ? "كارفور" : "Carrefour",
+        text: lang === "AR" ?"من أين تشتري" : "Points de vente",
       },
       body: {
         text:
           lang === "AR"
-            ? "اختر متجر كارفور الاقرب إليك"
+            ? "إليك المتاجر الأقرب إليك، اختر ما يناسبك منها"
             : "Voici les magasins les plus proches de chez vous , choisissez le vôtre",
       },
       action: {
@@ -72,3 +72,20 @@ export async function storeOption(lat: number, long: number, from: string) {
 
   return custom
 }
+
+export async function getStoreLocation(id: string) {
+  
+    let custom = {
+      type: "location",
+      location: {
+        longitude: 33.5420925,
+        latitude: -7.6425059,
+        name:"Côté Para Bourgogne",
+        address: "à côté de la clinique Badr، 2 Rue Aïn el aouda، angle Bd Aïn Taoujtate, Casablanca 20050",
+      },
+    };
+  
+  
+    return custom;
+  }
+  
