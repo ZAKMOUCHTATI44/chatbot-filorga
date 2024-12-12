@@ -20,6 +20,8 @@ export async function chatbot(req: Request, res: Response) {
   switch (message.message_type) {
     case "location":
       let search = "location";
+
+      console.log("Send List of stores")
       // TODO
       // sendMessage({
       //   channel: "whatsapp",
