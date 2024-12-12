@@ -90,8 +90,8 @@ export async function getStep2(phone: string) {
         type: "text",
         text:
           lang === Lang.AR
-            ? "اعثري على روتين مخصص."
-            : "Trouver une routine personnalisée.",
+            ? "اعثري على روتين."
+            : "Trouver une routine.",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -216,7 +216,7 @@ export async function getStep5(phone: string) {
       type: "list",
       header: {
         type: "text",
-        text: lang === Lang.AR ? "تحدث إلى أحد المستشارين" : "Parler à un Conseiller",
+        text: lang === Lang.AR ? "تحدث إلينا" : "Parler avec nous",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
