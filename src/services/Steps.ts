@@ -229,7 +229,7 @@ export async function getStep5(phone: string) {
                 : "Veuillez choisir une option",
             rows: [
               {
-                id: "5-1",
+                id: "support-1",
                 description:
                   lang === Lang.AR
                     ? "تلقي مكالمة هاتفية."
@@ -238,7 +238,7 @@ export async function getStep5(phone: string) {
                 title: " ",
               },
               {
-                id: "5-2",
+                id: "support-2",
                 description:
                   lang === Lang.AR
                     ? "اطرح سؤالاً عبر واتساب."
@@ -246,7 +246,7 @@ export async function getStep5(phone: string) {
                 title: " ",
               },
               {
-                id: "5-3",
+                id: "support-3",
                 description: lang === Lang.AR
                     ? "اكتب رسالة هنا (الرد خلال 24 ساعة)."
                     : "Écrire un message ici (réponse sous 24h).",
