@@ -6,13 +6,12 @@ import { sendMessage } from "./nexmoService";
 import { Lang } from "@prisma/client";
 import { createOrUpdateLead } from "./leadService";
 import { getLang } from "./LangService";
-import { getStep1 } from "./Steps";
+import { getStep1, getStep2, getStep3, getStep5 } from "./Steps";
 
-export async function chatbot(req:Request , res : Response) {
+export async function chatbot(req: Request, res: Response) {
   let message: MessageRequest = req.body;
 
-  console.log(JSON.stringify(message))
-
+  console.log(JSON.stringify(message));
 
   let step: string = "";
   const lastMessage = await getLastMessage(message.from);
@@ -20,7 +19,7 @@ export async function chatbot(req:Request , res : Response) {
   switch (message.message_type) {
     case "location":
       let search = "location";
-      // TODO 
+      // TODO
       // sendMessage({
       //   channel: "whatsapp",
       //   from: message.to,
@@ -88,14 +87,60 @@ export async function chatbot(req:Request , res : Response) {
               message_type: "custom",
               custom: await getStep1(message.from),
             });
-          
+            sendButtonBackToMenu(message)
             break;
-        
+
+          case "2":
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "custom",
+              custom: await getStep2(message.from),
+            });
+            sendButtonBackToMenu(message)
+
+            break;
+          case "3":
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "custom",
+              custom: await getStep3(message.from),
+            });
+            sendButtonBackToMenu(message)
+
+            break;
+          case "4":
+            const lang = await getLang(message.from);
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "text",
+              text:
+                lang === Lang.AR
+                  ? `يرجى مشاركة موقعك معنا📍`
+                  : "Merci de nous partager votre localisation📍",
+            });
+            sendButtonBackToMenu(message)
+            break;
+          case "5":
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "custom",
+              custom: await getStep5(message.from)
+            });
+            sendButtonBackToMenu(message)
+            break;
+
           default:
             break;
         }
-        console.log(`handle each step with his id ${step}`)
-      
+        console.log(`handle each step with his id ${step}`);
       } else if (id.includes("menu-default")) {
         const lang = await getLang(message.from);
 
@@ -124,7 +169,6 @@ export async function chatbot(req:Request , res : Response) {
       break;
   }
 
-
   saveMessage({
     body: message.text ?? "",
     from: message.from,
@@ -134,9 +178,7 @@ export async function chatbot(req:Request , res : Response) {
     messageId: message.message_uuid ?? "",
   });
   res.status(200).end();
-
 }
-
 
 function sendButtonBackToMenu(message: MessageRequest) {
   setTimeout(async () => {
