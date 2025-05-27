@@ -7,8 +7,8 @@ export async function getStep1(phone: string) {
   const lang = await getLang(phone);
 
   let body = {
-    fr: "Quels produits souhaitez-vous découvrir ?",
-    ar: "ما هي المنتجات التي ترغب في اكتشافها؟",
+    fr: "Quel est le motif de votre réclamation ?",
+    ar: "ما هو سبب شكواك؟",
   };
 
   let custom = {
@@ -17,7 +17,7 @@ export async function getStep1(phone: string) {
       type: "list",
       header: {
         type: "text",
-        text: lang === Lang.AR ? "اكتشف منتجاتنا" : "Découvrir Nos Produits",
+        text: lang === Lang.AR ? "ARMA" : "ARMA",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -26,7 +26,7 @@ export async function getStep1(phone: string) {
         text: " ",
       },
       action: {
-        button: lang === Lang.AR ? "منتجاتنا" : "Produits",
+        button: lang === Lang.AR ? "خيارات" : "Options",
         sections: [
           {
             title:
@@ -36,32 +36,33 @@ export async function getStep1(phone: string) {
                 id: "products1",
                 description:
                   lang === Lang.AR
-                    ? "✨👀💆‍♀️ تقليل التجاعيد (TIME Filler، Optim-Eyes)"
-                    : "✨👀💆‍♀️ Réduction des rides (TIME Filler, Optim-Eyes)",
+                    ? "Ramassage non effectué"
+                    : "Ramassage non effectué",
                 title: " ",
               },
               {
                 id: "products2",
                 description:
                   lang === Lang.AR
-                    ? "💧🌿💆‍♀️ الترطيب (Hydra-Filler)"
-                    : "💧🌿💆‍♀️ Hydratation (Hydra-Filler)",
+                    ? "Bac cassé ou manquant"
+                    : "Bac cassé ou manquant",
                 title: " ",
               },
               {
                 id: "products3",
-                description:
-                  lang === Lang.AR
-                    ? "☀️🛡️ حماية من الأشعة فوق البنفسجية (UV Bronze)"
-                    : "☀️🛡️ Protection UV (UV Bronze)",
+                description: lang === Lang.AR ? "Propreté" : "Propreté",
                 title: " ",
               },
               {
                 id: "products4",
                 description:
-                  lang === Lang.AR
-                    ? "👁️✨🧴 منتجات لمنطقة حول العينين"
-                    : "👁️✨🧴 Produits pour le contour des yeux",
+                  lang === Lang.AR ? "Comportement d’un agent" : "Comportement d’un agent",
+                title: " ",
+              },
+              {
+                id: "products5",
+                description:
+                  lang === Lang.AR ? "Comportement d’un agent" : "Autre",
                 title: " ",
               },
             ],
@@ -78,8 +79,8 @@ export async function getStep2(phone: string) {
   const lang = await getLang(phone);
 
   let body = {
-    fr: "Pour trouver votre routine idéale, j’ai besoin de quelques informations rapides. \n 1️⃣ Quel est votre type de peau ?",
-    ar: "للعثور على روتينك المثالي، أحتاج إلى بعض المعلومات السريعة. \n 1️⃣ ما هو نوع بشرتك؟"
+    fr: " Quel service souhaitez-vous programmer ?",
+    ar: "ما هي الخدمة التي ترغب في جدولتها؟" ,
   };
 
   let custom = {
@@ -88,7 +89,7 @@ export async function getStep2(phone: string) {
       type: "list",
       header: {
         type: "text",
-        text: lang === Lang.AR ? "اعثري على روتين." : "Trouver une routine.",
+        text: lang === Lang.AR ? "Options" : "Options",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -106,22 +107,22 @@ export async function getStep2(phone: string) {
               {
                 id: "peau-1",
                 title: " ",
-                description: lang === Lang.AR ? "جافة" : "Sèche .",
+                description: lang === Lang.AR ? "جمع النفايات الضخمة." : "Ramassage d’encombrants .",
               },
               {
                 id: "peau-2",
                 title: " ",
-                description: lang === Lang.AR ? "دهنية" : "Grasse .",
+                description: lang === Lang.AR ? "النفايات الخضراء." : "Déchets verts .",
               },
               {
                 id: "peau-3",
                 title: " ",
-                description: lang === Lang.AR ? "مختلطة" : "Mixte.",
+                description: lang === Lang.AR ? "التنظيف في بعض الأحيان." : "Nettoyage ponctuel .",
               },
               {
                 id: "peau-4",
                 title: " ",
-                description: lang === Lang.AR ? "عادية" : "Normale",
+                description: lang === Lang.AR ? "تسليم أو استبدال سلة المهملات" : "Livraison ou remplacement de bac",
               },
             ],
           },
@@ -138,7 +139,7 @@ export async function getStep2detail(phone: string) {
 
   let body = {
     fr: " Quelle est votre principale préoccupation ?  ",
-    ar: " ما هو مصدر قلقك الرئيسي؟  "
+    ar: " ما هو مصدر قلقك الرئيسي؟  ",
   };
 
   let custom = {
@@ -165,7 +166,10 @@ export async function getStep2detail(phone: string) {
               {
                 id: "routine-1",
                 title: " ",
-                description: lang === Lang.AR ? "التجاعيد وفقدان التماسك." : "Rides et perte de fermeté.",
+                description:
+                  lang === Lang.AR
+                    ? "التجاعيد وفقدان التماسك."
+                    : "Rides et perte de fermeté.",
               },
               {
                 id: "routine-2",
@@ -180,7 +184,10 @@ export async function getStep2detail(phone: string) {
               {
                 id: "routine-4",
                 title: " ",
-                description: lang === Lang.AR ? "الحماية من الأشعة فوق البنفسجية" : "Protection UV",
+                description:
+                  lang === Lang.AR
+                    ? "الحماية من الأشعة فوق البنفسجية"
+                    : "Protection UV",
               },
             ],
           },
@@ -192,14 +199,12 @@ export async function getStep2detail(phone: string) {
   return custom;
 }
 
-
-
 export async function getStep3(phone: string) {
   const lang = await getLang(phone);
 
   let body = {
-    fr: "Nos produits sont formulés avec des actifs inspirés de la médecine esthétique. Quel actif souhaitez-vous explorer ?",
-    ar: "تم تركيب منتجاتنا بمكونات نشطة مستوحاة من الطب التجميلي. ما هو المكون النشط الذي ترغبين في استكشافه؟",
+    fr: "Pour envoyer une candidature spontanée, merci de nous transmettre : nom, ville, poste souhaité et CV.",
+    ar: "لإرسال طلب توظيف افتراضي، يرجى إرسال: الاسم، المدينة، الوظيفة المطلوبة والسيرة الذاتية.",
   };
 
   let custom = {
@@ -208,7 +213,7 @@ export async function getStep3(phone: string) {
       type: "list",
       header: {
         type: "text",
-        text: lang === Lang.AR ? " الأصول والخبرة" : " Actifs et Expertise.",
+        text: lang === Lang.AR ? "ما هو القسم الذي ترغب في الاتصال به؟" : "Quel service souhaitez-vous contacter ?",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -227,8 +232,8 @@ export async function getStep3(phone: string) {
                 id: "actifs1",
                 description:
                   lang === Lang.AR
-                    ? "حمض الهيالورونيك: الترطيب والحجم."
-                    : "Acide Hyaluronique : Hydratation et volume .",
+                    ? "خدمة العملاء؟"
+                    : "Service client",
 
                 title: " ",
               },
@@ -236,16 +241,32 @@ export async function getStep3(phone: string) {
                 id: "actifs2",
                 description:
                   lang === Lang.AR
-                    ? " NCEF: تجديد الخلايا.  "
-                    : " NCEF : Régénération cellulaire.",
+                    ? "قسم الجودة"
+                    : "Service qualité",
                 title: " ",
               },
               {
                 id: "actifs3",
                 description:
                   lang === Lang.AR
-                    ? "الببتيدات: تقليل التجاعيد."
-                    : "Peptides : Réduction des rides..",
+                    ? "الإدارة الفنية"
+                    : "Direction technique",
+                title: " ",
+              },
+              {
+                id: "actifs4",
+                description:
+                  lang === Lang.AR
+                    ? "تواصل"
+                    : "Communication",
+                title: " ",
+              },
+              {
+                id: "actifs5",
+                description:
+                  lang === Lang.AR
+                    ? "البيانات الشخصية"
+                    : "Données personnelles",
                 title: " ",
               },
             ],
@@ -308,7 +329,8 @@ export async function getStep5(phone: string) {
               },
               {
                 id: "support-3",
-                description: lang === Lang.AR
+                description:
+                  lang === Lang.AR
                     ? "اكتب رسالة هنا (الرد خلال 24 ساعة)."
                     : "Écrire un message ici (réponse sous 24h).",
                 title: " ",
