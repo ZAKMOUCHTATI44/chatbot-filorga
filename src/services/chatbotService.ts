@@ -10,7 +10,7 @@ import {
   getStep1,
   getStep2,
   getStep2detail,
-  getStep3,
+  getStep4,
   getStep5,
 } from "./Steps";
 import { getProductDetail } from "./ProductDetail";
@@ -124,18 +124,8 @@ export async function chatbot(req: Request, res: Response) {
 
             break;
           case "3":
-            sendMessage({
-              channel: "whatsapp",
-              from: message.to,
-              to: message.from,
-              message_type: "custom",
-              custom: await getStep3(message.from),
-            });
-            sendButtonBackToMenu(message);
-
-            break;
-          case "4":
             const lang = await getLang(message.from);
+
             sendMessage({
               channel: "whatsapp",
               from: message.to,
@@ -143,8 +133,19 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "text",
               text:
                 lang === Lang.AR
-                  ? `يرجى مشاركة موقعك معنا📍`
-                  : "Merci de nous partager votre localisation📍",
+                  ? `لإرسال طلب توظيف افتراضي، يرجى إرسال: الاسم، المدينة، الوظيفة المطلوبة والسيرة الذاتية.`
+                  : "Pour envoyer une candidature spontanée, merci de nous transmettre : nom, ville, poste souhaité et CV.",
+            });
+            sendButtonBackToMenu(message);
+
+            break;
+          case "4":
+            sendMessage({
+              channel: "whatsapp",
+              from: message.to,
+              to: message.from,
+              message_type: "custom",
+              custom: await getStep4(message.from),
             });
             sendButtonBackToMenu(message);
             break;
@@ -160,7 +161,6 @@ export async function chatbot(req: Request, res: Response) {
               message_type: "custom",
               custom: await getStep5(message.from),
             });
-            // sendButtonBackToMenu(message)
             break;
 
           default:

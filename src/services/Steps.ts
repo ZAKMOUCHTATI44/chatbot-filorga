@@ -199,12 +199,12 @@ export async function getStep2detail(phone: string) {
   return custom;
 }
 
-export async function getStep3(phone: string) {
+export async function getStep4(phone: string) {
   const lang = await getLang(phone);
 
   let body = {
-    fr: "Pour envoyer une candidature spontanée, merci de nous transmettre : nom, ville, poste souhaité et CV.",
-    ar: "لإرسال طلب توظيف افتراضي، يرجى إرسال: الاسم، المدينة، الوظيفة المطلوبة والسيرة الذاتية.",
+    fr: " Quel service souhaitez-vous contacter ?",
+    ar: "ما هو القسم الذي ترغب في الاتصال به؟",
   };
 
   let custom = {
