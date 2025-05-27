@@ -1,8 +1,8 @@
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,13 +18,14 @@ model Lead {
 
   @@map("leads")
 }
+
 model Message {
   id        Int      @id @default(autoincrement())
   messageId String
   to        String
   from      String
   type      String
-  body      String   @db.LongText
+  body      String
   step      Int?
   latitude  Float?
   longitude Float?
@@ -36,32 +37,33 @@ model Message {
 
 model MessageTemplate {
   id        Int      @id @default(autoincrement())
-  contentFr String   @db.LongText
-  contentEn String   @db.LongText
-  titleEn  String
+  contentFr String
+  contentEn String
+  titleEn   String
   titleFr   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
   @@map("message_templates")
 }
 
 model Store {
-  id            String   @id @default(uuid())
-  storeId       Int      @unique @default(autoincrement())
+  id            String  @id @default(uuid())
+  storeId       Int     @unique @default(autoincrement())
   name          String
   nameAr        String?
   distance      String?
   latitude      Float
   longitude     Float
   streetAdress  String
-  locationCount Int      @default(0)
+  locationCount Int     @default(0)
 
   @@map("stores")
 }
 
 model Ticket {
   id        String       @id @default(uuid())
-  content   String       @db.LongText
+  content   String
   phone     String
   status    Ticketstatus @default(new)
   createdAt DateTime     @default(now())
@@ -76,7 +78,6 @@ enum Ticketstatus {
   assign
   done
 }
-
 
 enum Lang {
   AR
