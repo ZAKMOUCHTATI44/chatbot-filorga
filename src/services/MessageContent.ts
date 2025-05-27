@@ -3,8 +3,8 @@ import { getLang } from "./LangService";
 
 export async function getMenu(lang: Lang) {
   let body = {
-    fr: "Bienvenue chez Filorga Maroc 🌟  Je suis votre assistant beauté, prêt à vous guider pour sublimer votre peau.   Que souhaitez-vous faire aujourd’hui ? ",
-    ar: "أهلاً وسهلاً في فيلورغا المغرب 🌟 أنا مساعدك الجمالي، مستعد لإرشادك لتحسين بشرتك. ماذا ترغب في القيام به اليوم؟",
+    fr: "Bonjour, bienvenue sur le service en ligne d’ARMA Environnement. Comment pouvons-nous vous aider ?",
+    ar: "مرحبًا بكم في خدمة ARMA Environnement عبر الإنترنت. كيف يمكننا مساعدتك؟",
   };
 
   let custom = {
@@ -13,7 +13,7 @@ export async function getMenu(lang: Lang) {
       type: "list",
       header: {
         type: "text",
-        text: lang === Lang.AR ? "Filorga" : "Filorga",
+        text: lang === Lang.AR ? "ARMA" : "ARMA",
       },
       body: {
         text: lang === Lang.AR ? body.ar : body.fr,
@@ -30,27 +30,40 @@ export async function getMenu(lang: Lang) {
             rows: [
               {
                 id: "option1",
-                description :lang === Lang.AR ? "اكتشف منتجاتنا." : "Découvrir nos produits. ",
+                description:
+                  lang === Lang.AR
+                    ? "الإبلاغ عن مطالبة"
+                    : "Déclarer une réclamation",
                 title: " ",
               },
               {
                 id: "option2",
-                description : lang === Lang.AR ? "ابحث عن روتين مخصص." : "Trouver une routine personnalisée. ",
+                description:
+                  lang === Lang.AR
+                    ? "طلب مرور الخدمة"
+                    : "Demander un passage de service ",
                 title: " ",
               },
               {
                 id: "option3",
-                description :lang === Lang.AR ? "تعرف على أصولنا وخبراتنا." :  "En savoir plus sur nos actifs et notre expertise.",
+                description:
+                  lang === Lang.AR ? "تقديم الطلب" : "Déposer une candidature",
                 title: " ",
               },
               {
                 id: "option4",
-                description: lang === Lang.AR ? "تحديد موقع نقطة بيع." : "Localiser un point de vente. ",
+                description:
+                  lang === Lang.AR
+                    ? "الاتصال بخدمة ARMA"
+                    : "Contacter un service ARMA",
                 title: " ",
               },
               {
                 id: "option5",
-                description: lang === Lang.AR ? "التحدث مع مستشار." :  "Parler à un conseiller.",
+                description:
+                  lang === Lang.AR
+                    ? "متابعة المطالبة أو الطلب"
+                    : "Suivre une réclamation ou une demande",
                 title: " ",
               },
             ],
