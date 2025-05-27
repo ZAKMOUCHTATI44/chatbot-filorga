@@ -94,12 +94,29 @@ export async function chatbot(req: Request, res: Response) {
         });
         sendButtonBackToMenu(message);
       } else if (id.includes("peau")) {
+        const lang = await getLang(message.from);
         sendMessage({
           channel: "whatsapp",
           from: message.to,
           to: message.from,
-          message_type: "custom",
-          custom: await getStep2detail(message.from),
+          message_type: "text",
+          text:
+            lang === Lang.AR
+              ? `يرجى تزويدنا بالعنوان والتاريخ المطلوب، بالإضافة إلى اسمك ورقم هاتفك.`
+              : "Merci de nous indiquer l’adresse, la date souhaitée, ainsi que votre nom et numéro de téléphone.",
+        });
+        sendButtonBackToMenu(message);
+      } else if (id.includes("actifs")) {
+        const lang = await getLang(message.from);
+        sendMessage({
+          channel: "whatsapp",
+          from: message.to,
+          to: message.from,
+          message_type: "text",
+          text:
+            lang === Lang.AR
+              ? "لقد تم تحويل طلبك. سوف نتصل بك في أقرب وقت ممكن."
+              : "Votre demande a été transmise. Nous reviendrons vers vous dans les meilleurs délais.",
         });
         sendButtonBackToMenu(message);
       } else if (id.includes("option")) {
