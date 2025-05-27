@@ -41,6 +41,7 @@ export async function chatbot(req: Request, res: Response) {
       break;
     case "reply":
       let { id, title, description } = message?.reply;
+
       if (id.includes("location")) {
         // get the store id and return the location to user
         sendMessage({
@@ -125,7 +126,6 @@ export async function chatbot(req: Request, res: Response) {
             break;
           case "3":
             const lang = await getLang(message.from);
-
             sendMessage({
               channel: "whatsapp",
               from: message.to,
@@ -150,17 +150,18 @@ export async function chatbot(req: Request, res: Response) {
             sendButtonBackToMenu(message);
             break;
           case "5":
-            const rows = await getStep5(message.from);
-            console.log("******************");
-            console.log(JSON.stringify(rows));
-            console.log("******************");
+            let lang2 = await getLang(message.from);
             sendMessage({
               channel: "whatsapp",
               from: message.to,
               to: message.from,
-              message_type: "custom",
-              custom: await getStep5(message.from),
+              message_type: "text",
+              text:
+                lang2 === Lang.AR
+                  ? "الرجاء إدخال رقم حالتك"
+                  : "Veuillez entrer votre numéro de dossier : ",
             });
+            sendButtonBackToMenu(message);
             break;
 
           default:
@@ -168,9 +169,9 @@ export async function chatbot(req: Request, res: Response) {
         }
         console.log(`handle each step with his id ${step}`);
       } else if (id.includes("menu-default")) {
-        const lang = await getLang(message.from);
+        let lang1 = await getLang(message.from);
 
-        let custom = await getMenu(lang);
+        let custom = await getMenu(lang1);
         sendMessage({
           channel: "whatsapp",
           from: message.to,
