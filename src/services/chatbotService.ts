@@ -24,6 +24,9 @@ export async function chatbot(req: Request, res: Response) {
   let step: string = "";
   const lastMessage = await getLastMessage(message.from);
 
+
+  console.log(JSON.stringify(lastMessage))
+
   switch (message.message_type) {
     case "location":
       sendMessage({
