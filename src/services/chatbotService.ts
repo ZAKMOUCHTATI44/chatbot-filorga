@@ -81,12 +81,16 @@ export async function chatbot(req: Request, res: Response) {
           profileName: message.profile.name,
         });
       } else if (id.includes("products")) {
+        const lang = await getLang(message.from);
         sendMessage({
           channel: "whatsapp",
           from: message.to,
           to: message.from,
-          message_type: "custom",
-          custom: await getProductDetail(message.from),
+          message_type: "text",
+          text:
+            lang === Lang.AR
+              ? `شكرًا. يرجى تقديم العنوان ووصفًا موجزًا ​​وإرفاق صورة إذا رغبت في ذلك.`
+              : "Merci. Veuillez indiquer l’adresse, une brève description, et joindre une photo si vous le souhaitez.",
         });
         sendButtonBackToMenu(message);
       } else if (id.includes("peau")) {
